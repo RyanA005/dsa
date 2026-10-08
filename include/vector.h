@@ -38,6 +38,8 @@ Vector vector_new(void) {
         .size = 0ULL,
         .capacity = VECTOR_DEFAULT_CAPACITY,
     };
+    if (!vec.data)
+        vec.capacity = 0ULL;
 
     return vec;
 }
@@ -48,7 +50,6 @@ void vector_free(Vector *vec) {
     vec->data = NULL;
     vec->size = 0ULL;
     vec->capacity = 0ULL;
-
     return;
 }
 

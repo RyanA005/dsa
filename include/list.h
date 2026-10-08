@@ -38,6 +38,8 @@ typedef struct {
 
 Node *node_new(uint64_t data, Node *next) {
     Node *n = malloc(sizeof(Node));
+    if (!n)
+        return NULL; // fail
 
     n->data = data;
     n->next = next;
@@ -96,7 +98,7 @@ void list_push_tail(List *list, uint64_t *data) {
 void list_push_head(List *list, uint64_t *data) {
     Node *n = node_new(*data, list->head);
     if (!n)
-        return;
+        return; // fail
 
     if (!list->head)
         list->tail = n;
@@ -161,7 +163,7 @@ void list_insert(List *list, uint64_t index, uint64_t *data) {
     Node *prev = node_at(list, index - 1);
     Node *n = node_new(*data, prev->next);
     if (!n)
-        return;
+        return; // fail
 
     prev->next = n;
     list->size++;
